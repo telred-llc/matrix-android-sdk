@@ -11,7 +11,7 @@ Bugfix:
  -
 
 API Change:
- -
+ - `MXSession.openIdToken()` callback has a more typed parameter
 
 Translations:
  -
