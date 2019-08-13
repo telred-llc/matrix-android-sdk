@@ -36,7 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// FIXME Stop sending the matrix token for this request...
 public class ThirdPidRestClient extends RestClient<ThirdPidApi> {
 
     /**
