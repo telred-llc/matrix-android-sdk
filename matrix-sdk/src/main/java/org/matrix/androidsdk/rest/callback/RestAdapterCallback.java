@@ -30,7 +30,6 @@ import org.matrix.androidsdk.core.rest.DefaultRetrofit2ResponseHandler;
 
 import java.io.IOException;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -229,10 +228,14 @@ public class RestAdapterCallback<T> implements Callback<T> {
                 MatrixError mxError;
                 try {
                     HttpError error = ((HttpException) exception).getHttpError();
-                    ResponseBody errorBody = response.errorBody();
 
                     String bodyAsString = error.getErrorBody();
-                    mxError = JsonUtils.getGson(false).fromJson(bodyAsString, MatrixError.class);
+                    if (bodyAsString.startsWith("{")) {
+                        // Try to parse content
+                        mxError = JsonUtils.getGson(false).fromJson(bodyAsString, MatrixError.class);
+                    } else {
+                        mxError = new MatrixError();
+                    }
 
                     mxError.mStatus = response.code();
                     mxError.mReason = response.message();
