@@ -23,6 +23,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import android.net.Uri;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -186,7 +187,12 @@ public class RestClient<T> {
         String baseUrl;
         switch (endPointServer) {
             case IDENTITY_SERVER:
-                baseUrl = hsConfig.getIdentityServerUri().toString();
+                Uri identityServerUri = hsConfig.getIdentityServerUri();
+                if (identityServerUri != null) {
+                    baseUrl = identityServerUri.toString();
+                } else {
+                    throw new IllegalArgumentException("Missing Identity Server URL");
+                }
                 break;
             case ANTIVIRUS_SERVER:
                 baseUrl = hsConfig.getAntiVirusServerUri().toString();
