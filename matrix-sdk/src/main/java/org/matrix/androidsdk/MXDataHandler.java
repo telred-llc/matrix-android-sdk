@@ -60,7 +60,6 @@ import org.matrix.androidsdk.rest.client.EventsRestClient;
 import org.matrix.androidsdk.rest.client.PresenceRestClient;
 import org.matrix.androidsdk.rest.client.ProfileRestClient;
 import org.matrix.androidsdk.rest.client.RoomsRestClient;
-import org.matrix.androidsdk.rest.client.ThirdPidRestClient;
 import org.matrix.androidsdk.rest.model.ChunkEvents;
 import org.matrix.androidsdk.rest.model.Event;
 import org.matrix.androidsdk.rest.model.ReceiptData;
@@ -129,7 +128,6 @@ public class MXDataHandler implements CryptoDataHandler {
 
     private ProfileRestClient mProfileRestClient;
     private PresenceRestClient mPresenceRestClient;
-    private ThirdPidRestClient mThirdPidRestClient;
     private RoomsRestClient mRoomsRestClient;
     private EventsRestClient mEventsRestClient;
     private AccountDataRestClient mAccountDataRestClient;
@@ -265,22 +263,6 @@ public class MXDataHandler implements CryptoDataHandler {
      */
     public PresenceRestClient getPresenceRestClient() {
         return mPresenceRestClient;
-    }
-
-    /**
-     * Update the thirdPid Rest client.
-     *
-     * @param thirdPidRestClient the REST client
-     */
-    public void setThirdPidRestClient(ThirdPidRestClient thirdPidRestClient) {
-        mThirdPidRestClient = thirdPidRestClient;
-    }
-
-    /**
-     * @return the ThirdPid REST client
-     */
-    public ThirdPidRestClient getThirdPidRestClient() {
-        return mThirdPidRestClient;
     }
 
     /**
