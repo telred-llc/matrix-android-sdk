@@ -18,7 +18,8 @@ Translations:
  -
 
 Others:
- -
+ - MXSession: Add doesServerRequireIdentityServerParam() and doesServerAcceptIdentityAccessToken() methods.
+ - Remove the bind true flag from 3PID calls on registration (vector-im/riot-android#3252)
 
 Build:
  -
