@@ -5,7 +5,7 @@ Features:
  -
 
 Improvements:
- -
+ - Support optional default STUN server when no ICE provided by HS
 
 Bugfix:
  -
