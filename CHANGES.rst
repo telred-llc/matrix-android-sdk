@@ -5,7 +5,7 @@ Features:
  -
 
 Improvements:
- -
+ - Use wellknown to discover the IS of a HS (vector-im/riot-android#3283)
 
 Bugfix:
  -
