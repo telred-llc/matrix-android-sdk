@@ -242,6 +242,7 @@ public class ProfileRestClient extends RestClient<ProfileApi> {
             forgetPasswordParams.client_secret = pid.clientSecret;
             forgetPasswordParams.send_attempt = 1;
 
+            // TODO privacy: there is something to do here, we cannot use identity server from hsConfig
             Uri identityServerUri = mHsConfig.getIdentityServerUri();
             if (identityServerUri == null) {
                 callback.onUnexpectedError(new IdentityServerNotConfiguredException());
@@ -368,6 +369,7 @@ public class ProfileRestClient extends RestClient<ProfileApi> {
         params.clientSecret = clientSecret;
         params.sendAttempt = attempt;
 
+        // TODO privacy: there is something to do here, we cannot use identity server from hsConfig
         Uri identityServerUri = mHsConfig.getIdentityServerUri();
         if (identityServerUri == null) {
             callback.onUnexpectedError(new IdentityServerNotConfiguredException());
@@ -428,6 +430,7 @@ public class ProfileRestClient extends RestClient<ProfileApi> {
         params.clientSecret = clientSecret;
         params.sendAttempt = attempt;
 
+        // TODO privacy: there is something to do here, we cannot use identity server from hsConfig
         Uri identityServerUri = mHsConfig.getIdentityServerUri();
         if (identityServerUri == null) {
             callback.onUnexpectedError(new IdentityServerNotConfiguredException());
@@ -476,6 +479,7 @@ public class ProfileRestClient extends RestClient<ProfileApi> {
         AddThreePidsParams params = new AddThreePidsParams();
         params.three_pid_creds = new ThreePidCreds();
 
+        // TODO privacy: there is something to do here, we cannot use identity server from hsConfig
         Uri identityServerUri = mHsConfig.getIdentityServerUri();
         if (identityServerUri == null) {
             callback.onUnexpectedError(new IdentityServerNotConfiguredException());
