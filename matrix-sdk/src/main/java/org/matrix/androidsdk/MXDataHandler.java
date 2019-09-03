@@ -1016,7 +1016,7 @@ public class MXDataHandler implements CryptoDataHandler {
                 } else if (AccountDataElement.ACCOUNT_DATA_TYPE_WIDGETS.equals(accountDataElement.type)) {
                     // User widgets
                     manageUserWidgets(accountDataElement);
-                } else if (AccountDataElement.ACCOUNT_DATA_ACCEPTED_TERMS.equals(accountDataElement.type)) {
+                } else if (AccountDataElement.ACCOUNT_DATA_TYPE_ACCEPTED_TERMS.equals(accountDataElement.type)) {
                     // Accepted terms
                     manageAcceptedTerms(accountDataElement);
                 }
@@ -1044,7 +1044,7 @@ public class MXDataHandler implements CryptoDataHandler {
     }
 
     private void manageAcceptedTerms(AccountDataElement accountDataElement) {
-        //TODO
+        // Nothing to do
     }
 
     /**
