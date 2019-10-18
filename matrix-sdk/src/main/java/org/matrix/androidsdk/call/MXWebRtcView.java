@@ -512,4 +512,8 @@ public class MXWebRtcView extends ViewGroup {
             videoTrack.addSink(surfaceViewRenderer);
         }
     }
+
+    public void changeScalingType(ScalingType scalingType){
+        setScalingType(scalingType);
+    }
 }

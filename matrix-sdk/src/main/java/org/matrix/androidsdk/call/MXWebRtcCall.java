@@ -50,6 +50,7 @@ import org.webrtc.MediaConstraints;
 import org.webrtc.MediaStream;
 import org.webrtc.PeerConnection;
 import org.webrtc.PeerConnectionFactory;
+import org.webrtc.RendererCommon;
 import org.webrtc.RtpReceiver;
 import org.webrtc.SdpObserver;
 import org.webrtc.SessionDescription;
@@ -1763,5 +1764,13 @@ public class MXWebRtcCall extends MXCall {
         }
 
         super.dispatchOnStateDidChange(newState);
+    }
+
+    @Override
+    public void setScalingType(RendererCommon.ScalingType scalingType) {
+        super.setScalingType(scalingType);
+        if (mFullScreenRTCView != null) {
+            mFullScreenRTCView.changeScalingType(scalingType);
+        }
     }
 }

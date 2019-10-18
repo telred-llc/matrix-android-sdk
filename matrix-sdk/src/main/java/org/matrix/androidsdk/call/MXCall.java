@@ -32,6 +32,7 @@ import org.matrix.androidsdk.core.callback.ApiCallback;
 import org.matrix.androidsdk.core.model.MatrixError;
 import org.matrix.androidsdk.data.Room;
 import org.matrix.androidsdk.rest.model.Event;
+import org.webrtc.RendererCommon;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -706,5 +707,10 @@ public class MXCall implements IMXCall {
     public boolean isVideoRecordingMuted() {
         Log.w(LOG_TAG, "## muteVideoRecording(): not implemented - default value = false");
         return false;
+    }
+
+    @Override
+    public void setScalingType(RendererCommon.ScalingType scalingType) {
+        // Change the scaling type
     }
 }

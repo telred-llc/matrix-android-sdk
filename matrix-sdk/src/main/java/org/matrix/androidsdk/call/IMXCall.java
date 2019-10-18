@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 import org.matrix.androidsdk.MXSession;
 import org.matrix.androidsdk.data.Room;
 import org.matrix.androidsdk.rest.model.Event;
+import org.webrtc.RendererCommon;
 
 import javax.annotation.Nullable;
 
@@ -336,4 +337,6 @@ public interface IMXCall {
      * @return true if video recording is muted, false otherwise
      */
     boolean isVideoRecordingMuted();
+
+    void setScalingType(RendererCommon.ScalingType scalingType);
 }
