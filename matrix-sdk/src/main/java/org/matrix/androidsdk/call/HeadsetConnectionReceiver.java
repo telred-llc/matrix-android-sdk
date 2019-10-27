@@ -230,6 +230,8 @@ public class HeadsetConnectionReceiver extends BroadcastReceiver {
      * @return true if bluetooth headset is plugged
      */
     public static boolean isBTHeadsetPlugged() {
+        if (BluetoothAdapter.getDefaultAdapter() == null)
+            return false;
         return (BluetoothAdapter.STATE_CONNECTED == BluetoothAdapter.getDefaultAdapter().getProfileConnectionState(BluetoothProfile.HEADSET));
     }
 }
