@@ -18,6 +18,7 @@
 package org.matrix.androidsdk.call;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
@@ -753,5 +754,20 @@ public class MXCall implements IMXCall {
     @Override
     public void setScalingType(RendererCommon.ScalingType scalingType) {
         // Change the scaling type
+    }
+
+    @Override
+    public void screenVideo(Intent mediaProjectionPermissionResultData) {
+        // Change video source to screen
+    }
+
+    @Override
+    public void cameraVideo() {
+        // Change video source to camera
+    }
+
+    @Override
+    public boolean isScreenCast() {
+        return false;
     }
 }

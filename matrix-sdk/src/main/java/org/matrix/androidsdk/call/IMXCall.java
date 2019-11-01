@@ -16,6 +16,7 @@
 
 package org.matrix.androidsdk.call;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.google.gson.JsonObject;
@@ -341,7 +342,28 @@ public interface IMXCall {
      */
     boolean isVideoRecordingMuted();
 
+    /**
+     * Set scaling type video call
+     * @param scalingType
+     */
     void setScalingType(RendererCommon.ScalingType scalingType);
 
     List<PeerConnection.IceServer> getIceServers();
+
+    /**
+     * Switch to screen video for video call
+     * @param mediaProjectionPermissionResultData
+     */
+    void screenVideo(Intent mediaProjectionPermissionResultData);
+
+    /**
+     * Switch to camera video for video call
+     */
+    void cameraVideo();
+
+    /**
+     * Get is screen video
+     * @return
+     */
+    boolean isScreenCast();
 }
