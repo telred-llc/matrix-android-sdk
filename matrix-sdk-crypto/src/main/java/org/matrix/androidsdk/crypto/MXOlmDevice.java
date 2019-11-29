@@ -18,6 +18,7 @@
 package org.matrix.androidsdk.crypto;
 
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 
 import com.google.gson.JsonParser;
@@ -49,9 +50,11 @@ public class MXOlmDevice {
 
     // Curve25519 key for the account.
     private String mDeviceCurve25519Key;
+    private String mPrivateDeviceCurve25519Key;
 
     // Ed25519 key for the account.
     private String mDeviceEd25519Key;
+    private String mPrivateDeviceEd25519Key;
 
     // The store where crypto data is saved.
     private final IMXCryptoStore mStore;
@@ -122,6 +125,53 @@ public class MXOlmDevice {
 
         try {
             mDeviceCurve25519Key = mOlmAccount.identityKeys().get(OlmAccount.JSON_KEY_IDENTITY_KEY);
+            mPrivateDeviceCurve25519Key = mOlmAccount.privateIdentityKeys().get(OlmAccount.JSON_KEY_IDENTITY_KEY);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "## MXOlmDevice : cannot find " + OlmAccount.JSON_KEY_IDENTITY_KEY + " with error " + e.getMessage(), e);
+        }
+
+        try {
+            mDeviceEd25519Key = mOlmAccount.identityKeys().get(OlmAccount.JSON_KEY_FINGER_PRINT_KEY);
+            mPrivateDeviceEd25519Key = mOlmAccount.privateIdentityKeys().get(OlmAccount.JSON_KEY_FINGER_PRINT_KEY);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "## MXOlmDevice : cannot find " + OlmAccount.JSON_KEY_FINGER_PRINT_KEY + " with error " + e.getMessage(), e);
+        }
+
+        mInboundGroupSessionMessageIndexes = new HashMap<>();
+    }
+
+    public MXOlmDevice(IMXCryptoStore store, OlmAccount olmAccount) {
+        mStore = store;
+//        OlmAccount prevAccount = mStore.getAccount();
+//        prevAccount.releaseAccount();
+        // Retrieve the account from the store
+        mOlmAccount = olmAccount;
+//        mStore.storeAccount(mOlmAccount);
+
+//        if (null == mOlmAccount) {
+//            Log.d(LOG_TAG, "MXOlmDevice : create a new olm account");
+//            // Else, create it
+//            try {
+//                mOlmAccount = new OlmAccount();
+//                mStore.storeAccount(mOlmAccount);
+//            } catch (Exception e) {
+//                Log.e(LOG_TAG, "MXOlmDevice : cannot initialize mOlmAccount " + e.getMessage(), e);
+//            }
+//        } else {
+//            Log.d(LOG_TAG, "MXOlmDevice : use an existing account");
+//        }
+
+        try {
+            mOlmUtility = new OlmUtility();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "## MXOlmDevice : OlmUtility failed with error " + e.getMessage(), e);
+            mOlmUtility = null;
+        }
+
+        mOutboundGroupSessionStore = new HashMap<>();
+
+        try {
+            mDeviceCurve25519Key = mOlmAccount.identityKeys().get(OlmAccount.JSON_KEY_IDENTITY_KEY);
         } catch (Exception e) {
             Log.e(LOG_TAG, "## MXOlmDevice : cannot find " + OlmAccount.JSON_KEY_IDENTITY_KEY + " with error " + e.getMessage(), e);
         }
@@ -151,11 +201,19 @@ public class MXOlmDevice {
         return mDeviceCurve25519Key;
     }
 
+    public String getPrivateDeviceCurve25519Key() {
+        return mPrivateDeviceCurve25519Key;
+    }
+
     /**
      * @return the Ed25519 key for the account.
      */
     public String getDeviceEd25519Key() {
         return mDeviceEd25519Key;
+    }
+
+    public String getPrivateDeviceEd25519Key() {
+        return mPrivateDeviceEd25519Key;
     }
 
     /**
@@ -180,6 +238,16 @@ public class MXOlmDevice {
     public Map<String, Map<String, String>> getOneTimeKeys() {
         try {
             return mOlmAccount.oneTimeKeys();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "## getOneTimeKeys() : failed " + e.getMessage(), e);
+        }
+
+        return null;
+    }
+
+    public Map<String, Map<String, String>> getPrivateOneTimeKeys() {
+        try {
+            return mOlmAccount.privateOneTimeKeys();
         } catch (Exception e) {
             Log.e(LOG_TAG, "## getOneTimeKeys() : failed " + e.getMessage(), e);
         }
@@ -842,5 +910,13 @@ public class MXOlmDevice {
      */
     public boolean hasInboundSessionKeys(String roomId, String senderKey, String sessionId) {
         return null != getInboundGroupSession(sessionId, senderKey, roomId);
+    }
+
+    public int insertOneTimeKeyToLast(String id, String publicKey, String privateKey) {
+        return mOlmAccount.insertOneTimeKeyToLast(id, true, publicKey, privateKey);
+    }
+
+    public int changeIdentityKeys(String publicCurve25519, String privateCurve25519, String publicEd25519, String privateEd25519) {
+        return mOlmAccount.changeIdentityKeys(publicCurve25519, privateCurve25519, publicEd25519, privateEd25519);
     }
 }

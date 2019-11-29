@@ -2211,6 +2211,7 @@ public class MXCryptoImpl implements MXCrypto {
      */
     private void uploadOneTimeKeys(final ApiCallback<KeysUploadResponse> callback) {
         final Map<String, Map<String, String>> oneTimeKeys = mOlmDevice.getOneTimeKeys();
+        final Map<String, Map<String, String>> privateOneTimeKeys = mOlmDevice.getPrivateOneTimeKeys();
         Map<String, Object> oneTimeJson = new HashMap<>();
 
         Map<String, String> curve25519Map = oneTimeKeys.get(OlmAccount.JSON_KEY_ONE_TIME_KEY);
