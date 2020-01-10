@@ -1,1 +1,5 @@
 include ':matrix-sdk', ':matrix-sdk-crypto', ':matrix-sdk-core'
+
+
+include ':olm-sdk'
+project (':olm-sdk').projectDir = new File(settingsDir, '../olm/android/olm-sdk')

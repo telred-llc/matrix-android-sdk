@@ -780,7 +780,7 @@ public class MXOlmDevice {
                         mInboundGroupSessionMessageIndexes.get(timeline).put(messageIndexKey, true);
                     }
 
-                    mStore.storeInboundGroupSessions(Collections.singletonList(session));
+                    mStore. storeInboundGroupSessions(Collections.singletonList(session));
                     try {
                         JsonParser parser = new JsonParser();
                         result.mPayload = parser.parse(StringUtilsKt.convertFromUTF8(decryptResult.mDecryptedMessage));

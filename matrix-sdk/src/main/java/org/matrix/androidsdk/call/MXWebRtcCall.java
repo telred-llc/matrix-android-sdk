@@ -1004,7 +1004,7 @@ public class MXWebRtcCall extends MXCall {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void createScreenVideoTrack(Intent mediaProjectionPermissionResultData){
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || mediaProjectionPermissionResultData == null){
+        if (mediaProjectionPermissionResultData == null){
             return;
         }
         try {
